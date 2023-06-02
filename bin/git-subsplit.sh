@@ -54,7 +54,7 @@ TAGS=
 NO_TAGS=
 REBUILD_TAGS=
 DRY_RUN=
-VERBOSE=
+VERBOSE=1
 
 subsplit_main()
 {
