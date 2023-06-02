@@ -191,19 +191,18 @@ subsplit_publish()
 			echo "${DEBUG} LOCAL_BRANCH=\"${LOCAL_BRANCH}\""
 			
 			say " - syncing branch '${HEAD}'"
-
+            
+            echo "${DEBUG} git checkout ${DEFAULT_BRANCH} >/dev/null 2>&1"
 			git checkout "${DEFAULT_BRANCH}" >/dev/null 2>&1
-			git branch -D "$LOCAL_BRANCH" >/dev/null 2>&1
-			git branch -D "${LOCAL_BRANCH}-checkout" >/dev/null 2>&1
-			git checkout -b "${LOCAL_BRANCH}-checkout" "origin/${HEAD}" >/dev/null 2>&1
+			echo "${DEBUG} git branch -D \"$LOCAL_BRANCH\" >/dev/null 2>&1"
+            git branch -D "$LOCAL_BRANCH" >/dev/null 2>&1
+			echo "${DEBUG} git branch -D \"${LOCAL_BRANCH}-checkout\" >/dev/null 2>&1"
+            git branch -D "${LOCAL_BRANCH}-checkout" >/dev/null 2>&1
+			echo "${DEBUG} git checkout -b \"${LOCAL_BRANCH}-checkout\" \"origin/${HEAD}\" >/dev/null 2>&1"
+            git checkout -b "${LOCAL_BRANCH}-checkout" "origin/${HEAD}" >/dev/null 2>&1
+            echo "${DEBUG} git subtree split -q --prefix=\"$SUBPATH\" --branch=\"$LOCAL_BRANCH\" \"origin/${HEAD}\" >/dev/null"
 			git subtree split -q --prefix="$SUBPATH" --branch="$LOCAL_BRANCH" "origin/${HEAD}" >/dev/null
 			RETURNCODE=$?
-
-			echo "${DEBUG} git checkout ${DEFAULT_BRANCH} >/dev/null 2>&1"
-			echo "${DEBUG} git branch -D \"$LOCAL_BRANCH\" >/dev/null 2>&1"
-			echo "${DEBUG} git branch -D \"${LOCAL_BRANCH}-checkout\" >/dev/null 2>&1"
-			echo "${DEBUG} git checkout -b \"${LOCAL_BRANCH}-checkout\" \"origin/${HEAD}\" >/dev/null 2>&1"
-			echo "${DEBUG} git subtree split -q --prefix=\"$SUBPATH\" --branch=\"$LOCAL_BRANCH\" \"origin/${HEAD}\" >/dev/null"
 
 			if [ $RETURNCODE -eq 0 ]
 			then
