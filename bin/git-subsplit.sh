@@ -43,7 +43,7 @@ then
 fi
 
 ANNOTATE=
-QUIET=
+QUIET=""
 COMMAND=
 SPLITS=
 REPO_URL=
@@ -62,7 +62,7 @@ subsplit_main()
 		opt="$1"
 		shift
 		case "$opt" in
-			-q) QUIET=1 ;;
+			-q) QUIET="" ;;
 			--debug) VERBOSE=1 ;;
 			--heads) HEADS="$1"; shift ;;
 			--no-heads) NO_HEADS=1 ;;
